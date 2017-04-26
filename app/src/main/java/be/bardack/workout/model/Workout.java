@@ -13,10 +13,12 @@ import java.util.List;
 public class Workout implements Parcelable {
     private String title;
     private List<WorkoutExercise> exercises;
+    private State state;
 
     public Workout(String title) {
         this.title = title;
         this.exercises = new ArrayList<>();
+        this.state = State.WAITING;
     }
 
     public Workout(Parcel in) {
@@ -28,6 +30,7 @@ public class Workout implements Parcelable {
             ex.setWorkout(this);
             exercises.add(ex);
         }
+        this.state = State.valueOf(in.readString());
     }
 
     public String getTitle() {
@@ -36,6 +39,10 @@ public class Workout implements Parcelable {
 
     public void addExercise(WorkoutExercise exercise) {
         this.exercises.add(exercise);
+    }
+
+    public State getState() {
+        return state;
     }
 
     public List<WorkoutExercise> getExercises() {
@@ -54,6 +61,7 @@ public class Workout implements Parcelable {
         for (WorkoutExercise exercise : exercises) {
             parcel.writeParcelable(exercise, flags);
         }
+        parcel.writeString(state.name());
     }
 
     public static final Parcelable.Creator<Workout> CREATOR = new Creator<Workout>() {

@@ -22,6 +22,7 @@ import be.bardack.workout.activities.ExampleTabbed;
 import be.bardack.workout.activities.ExampleTabbed2;
 import be.bardack.workout.adapter.WorkoutListAdapter;
 import be.bardack.workout.model.ExerciseStep;
+import be.bardack.workout.model.State;
 import be.bardack.workout.model.Workout;
 import be.bardack.workout.model.WorkoutExercise;
 
@@ -59,7 +60,7 @@ public class WorkoutActivity extends AppCompatActivity {
 
         Workout workout1 = new Workout("Workout 1");
         WorkoutExercise ex1 = new WorkoutExercise("Ex 1", workout1);
-        ex1.addStep(new ExerciseStep("Step 1", ex1));
+        ex1.addStep(new ExerciseStep("Step 1", ex1, State.FINISHED));
         ex1.addStep(new ExerciseStep("Step 2", ex1));
         workout1.addExercise(ex1);
         workouts.add(workout1);

@@ -14,11 +14,13 @@ public class WorkoutExercise implements Parcelable {
     private String title;
     private Workout workout;
     private List<ExerciseStep> steps;
+    private State state;
 
     public WorkoutExercise(String title, Workout workout) {
         this.title = title;
         this.workout = workout;
         this.steps = new ArrayList<>();
+        this.state = State.WAITING;
     }
 
     public WorkoutExercise(Parcel in) {
@@ -30,6 +32,7 @@ public class WorkoutExercise implements Parcelable {
             step.setWorkoutExercise(this);
             steps.add(step);
         }
+        state = State.valueOf(in.readString());
     }
 
     public void addStep(ExerciseStep step) {
@@ -42,6 +45,10 @@ public class WorkoutExercise implements Parcelable {
 
     public String getTitle() {
         return title;
+    }
+
+    public State getState() {
+        return state;
     }
 
     public List<ExerciseStep> getSteps() {
@@ -60,6 +67,7 @@ public class WorkoutExercise implements Parcelable {
         for (ExerciseStep step : steps) {
             parcel.writeParcelable(step, flags);
         }
+        parcel.writeString(state.name());
     }
 
     public static final Creator<WorkoutExercise> CREATOR = new Creator<WorkoutExercise>() {
