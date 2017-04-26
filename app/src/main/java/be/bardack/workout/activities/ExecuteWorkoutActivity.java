@@ -23,6 +23,8 @@ public class ExecuteWorkoutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_execute_workout);
 
+
+
         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.debug_layout);
         Workout workout = getIntent().getParcelableExtra("workout");
         addTextView(linearLayout, String.format("%s (%s)", workout.getTitle(), workout.getState().toString()));
@@ -42,6 +44,8 @@ public class ExecuteWorkoutActivity extends AppCompatActivity {
         } else {
             ((TextView) findViewById(R.id.current_step)).setText("No task");
         }
+
+        setTitle("Workout: " + workout.getTitle());
     }
 
     private void addTextView(LinearLayout layout, String text) {
